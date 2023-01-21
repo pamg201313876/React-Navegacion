@@ -43,7 +43,7 @@ export const Menu = () => {
         {route.map(route => (
 
           <li>
-            <NavLink to={route.to} style={({ isActive }) => ({ color: isActive ? 'red' : 'blue' })} >{route.text}</NavLink>
+            <NavLink key={route.to} to={route.to} style={({ isActive }) => ({ color: isActive ? 'red' : 'blue' })} >{route.text}</NavLink>
           </li>
 
         ))}
