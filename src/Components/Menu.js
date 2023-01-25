@@ -1,18 +1,27 @@
 import React from 'react'
 import { Link, NavLink, Routes } from 'react-router-dom'
+import { useAuth } from '../Data/Auth'
 
 export const Menu = () => {
+
+  const auth = useAuth();
+
   return (
     <nav>
-      <ul>        
+      <ul>
 
-        {route.map(route => (
+        {route.map(route => {
+          if(route.publicOnly && auth.user) return null;
 
-          <li key={route.to} >
-            <NavLink to={route.to} style={({ isActive }) => ({ color: isActive ? 'red' : 'blue' })} >{route.text}</NavLink>
-          </li>
+          if ( (route.private && !auth.user) ) return null;
 
-        ))}
+          return (
+            <li key={route.to} >
+              <NavLink to={route.to} style={({ isActive }) => ({ color: isActive ? 'red' : 'blue' })} >{route.text}</NavLink>
+            </li>
+          )
+
+        })}
 
       </ul>
     </nav>
@@ -24,22 +33,28 @@ const route = [];
 route.push(
   {
     to: '/',
-    text: 'Home'
+    text: 'Home',
+    private: false,
   },
   {
     to: '/profile',
-    text: 'Profile'
+    text: 'Profile',
+    private: true,
   },
   {
     to: '/blog',
-    text: 'Blog'
+    text: 'Blog',
+    private: false,
   },
   {
     to: '/login',
-    text: 'Log In'
+    text: 'Log In',
+    publicOnly: true,
+    private: false,
   },
   {
     to: '/logout',
-    text: 'Log Out'
+    text: 'Log Out',
+    private: true,
   },
 )
