@@ -1,17 +1,21 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../Data/Auth'
 
 export const Login = () => {
 
     const navigate = useNavigate();
-    const {user, login, logout} = useAuth();
+    const { user, login, logout } = useAuth();
     const [username, setUsername] = React.useState("")
 
- 
+
     const logearse = () => {
-        login({username})
+        login({ username })
         navigate('/profile')
+    }
+
+    if (user) {
+        return <Navigate to="profile" />;
     }
 
     return (

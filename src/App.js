@@ -8,7 +8,7 @@ import { Menu } from './Components/Menu'
 import { BlogPost } from './Components/BlogPost';
 import { Login } from './Components/Login';
 import { Logout } from './Components/Logout';
-import { AuthProvider, useAuth } from './Data/Auth';
+import { AuthProvider, useAuth, AuthRoute } from './Data/Auth';
 
 
 function App() {
@@ -25,8 +25,18 @@ function App() {
           </Route>
 
           <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/logout" element=
+            {
+              <AuthRoute>
+                <Logout />
+              </AuthRoute>
+            } />
+          <Route path="/profile" element=
+            {
+              <AuthRoute>
+                <ProfilePage />
+              </AuthRoute>
+            } />
           <Route path="*" element={<p>Not Found</p>} />
         </Routes>
       </AuthProvider>
