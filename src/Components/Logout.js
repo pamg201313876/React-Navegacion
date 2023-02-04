@@ -15,7 +15,7 @@ export const Logout = () => {
 
     return (
         <>
-            <hi>Logout</hi>
+            <h1>Logout</h1>
 
             <form onSubmit={logout} >
                 <label>

@@ -1,17 +1,20 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
+
+const adminList = ['Irisval', "RetaxMaster", 'Paublo']
 
 const AuthContext = React.createContext();
-
 const auth = {};
 
 function AuthProvider({ children }) {
 
+    const navigate = useNavigate();
     const [user, setUser] = React.useState(null)
 
     const login = ({ username }) => {
-        setUser(username)
+        let isAdmin = adminList.find(admin => admin === username)
+        setUser({username, isAdmin })       
     }
 
     const logout = () => {
@@ -34,10 +37,12 @@ function useAuth() {
 }
 
 
-function AuthRoute(children) {   
+function AuthRoute({children}) {   
 
-    if (!auth.user) {
-        return <Navigate to="/login" />
+    const authx = useAuth();
+
+    if (!authx.user) {
+        return <Navigate to="/login" />;
     }
 
     return children;

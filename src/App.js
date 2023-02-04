@@ -24,19 +24,24 @@ function App() {
             <Route path=":slug" element={<BlogPost />} />
           </Route>
 
-          <Route path="/login" element={<Login />} />
           <Route path="/logout" element=
             {
               <AuthRoute>
                 <Logout />
               </AuthRoute>
             } />
+            
           <Route path="/profile" element=
             {
               <AuthRoute>
                 <ProfilePage />
               </AuthRoute>
             } />
+
+
+          <Route path="/login" element={<Login />} />
+
+          
           <Route path="*" element={<p>Not Found</p>} />
         </Routes>
       </AuthProvider>
